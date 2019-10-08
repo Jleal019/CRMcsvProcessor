@@ -1,10 +1,14 @@
 import pandas, numpy, csv, tkinter, re
 
 '''
+Written on Python 3.7.3
+using Pandas 0.25.1, Numpy 1.17.2 
+
 -Fix last name issue
 
--Deleting columns is faster in Excel/Calc
+-Deleting whole columns is faster in Excel/Calc
 '''
+print(pandas.__version__, numpy.__version__)
 
 fileName = 'export.csv'
 
