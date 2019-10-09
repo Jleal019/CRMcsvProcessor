@@ -1,4 +1,4 @@
-import pandas, numpy, csv, tkinter, re
+import pandas, numpy, csv, tkinter, re, phonenumbers
 
 '''
 Written on Python 3.7.3
@@ -8,36 +8,27 @@ using Pandas 0.25.1, Numpy 1.17.2
 
 -Deleting whole columns is faster in Excel/Calc
 '''
-print(pandas.__version__, numpy.__version__)
-
 fileName = 'export.csv'
-
 
 # creates CSV dataframe using pandas
 data = pandas.read_csv(fileName, delimiter=",", encoding="utf-8", dtype=object)
 
+
 # removes hello@gmail.com use from the Email column
 data = data.replace(to_replace='hello@gmail.com', value='')
 
-# removes leading 1's and +1's in Phone 1.1 and Phone 1 field
-
-
-
-print(data[['First Name', 'Email', 'Phone 1', 'Phone 1.1']])
+# removes leading 1's from phone numbers
+data['Phone 1.1'] = data['Phone 1.1'].str.lstrip('+1')
 
 
 def removeDupe():
 
     # loads CSV into file
-    print(data, '\n -------------------Unprocessed data above---------------------')
 
     # --- See output of program without changes ---
     # print(data.drop_duplicates(subset='Phone 1.1', keep="last"))
 
     # --- Remove trailing 1's ---
-
-
-
 
     # In 'subset', write all the fields you want to deduplicate with
     # A new file will be created called 'unDuped-by-Phone.csv'
@@ -66,6 +57,5 @@ def findDiff(ref, diff):
     print(catData.drop_duplicates(subset='Phone 1.1'))
 
     print(catData[["Name", "Phone 1.1"]])
-
 
 removeDupe()
