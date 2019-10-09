@@ -33,14 +33,31 @@ def removeDupe():
     # In 'subset', write all the fields you want to deduplicate with
     # A new file will be created called 'unDuped-by-Phone.csv'
     # This is the file without duplicates
-    print('------- All Data without duplicates -------')
+    # print('------- All Data without duplicates -------')
     # print(data.drop_duplicates(subset='Phone 1.1', keep="first"))
     # data.drop_duplicates(subset='Phone 1.1', keep="first").to_csv('unDuped-by-Phone.csv')
 
+    # Change Name field value based on duplicate row values in Phone 1.1 field
+    print('------- Renamed rows -------')
+    # Must pass keep as "last" since that is the value to be kept
+    dup = data.duplicated(subset='Phone 1.1', keep='first')
+    # create Duplicate column filled with True value
+    data['Duplicate'] = True
+    # Needed for some reason.
+    data.duplicated(subset='Phone 1.1', keep='first')
+    # Sets the newest (last) record to False if duplicate
+    data.loc[data['Phone 1.1'].duplicated(keep='first'), 'Duplicate'] = False
+    # Renames the records marked for deletion
+    data.loc[data['Duplicate'] == False, 'First Name'] = "MarkDelete360"
+
+    print("TESTING", data[['Id', 'First Name', 'Phone 1.1', 'Duplicate']])
+
+    print(data[['Id', 'Name', 'Phone 1.1']])
+
     # Prints specific column values
-    print('------- Data with specific columns without duplicates -------')
-    print(data[["Id", "Name", "Phone 1.1"]].drop_duplicates(subset='Phone 1.1', keep="first"))
-    data[["Id", "Name", "Phone 1.1"]].drop_duplicates(subset='Phone 1.1', keep="first").to_csv('Specific-Columns.csv')
+    # print('------- Data with specific columns without duplicates -------')
+    # print(data[["Id", "Name", "Phone 1.1"]].drop_duplicates(subset='Phone 1.1', keep="first"))
+    # data[["Id", "Name", "Phone 1.1"]].drop_duplicates(subset='Phone 1.1', keep="first").to_csv('Specific-Columns.csv')
 
     # to_csv by itself just gets rid of quotations in empty columns
     # data.to_csv('unQuoted.csv')
