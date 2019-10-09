@@ -27,8 +27,6 @@ def removeDupe():
     # --- See output of program without changes ---
     # print(data.drop_duplicates(subset='Phone 1.1', keep="last"))
 
-    # --- Remove trailing 1's ---
-
     # In 'subset', write all the fields you want to deduplicate with
     # A new file will be created called 'unDuped-by-Phone.csv'
     # This is the file without duplicates
