@@ -17,7 +17,10 @@ data = pandas.read_csv(fileName, delimiter=",", encoding="utf-8", dtype=object)
 data = data.replace(to_replace='hello@gmail.com', value='')
 
 # removes leading 1's from phone numbers
+
 data['Phone 1.1'] = data['Phone 1.1'].str.lstrip('+1')
+
+print(data[["Id", "Name", "Phone 1.1"]])
 
 
 def removeDupe():
@@ -25,16 +28,23 @@ def removeDupe():
     # loads CSV into file
 
     # --- See output of program without changes ---
-    # print(data.drop_duplicates(subset='Phone 1.1', keep="last"))
+    print('-------Data with duplicates -------')
+    print(data[['Id', 'Name', 'Phone 1.1']])
 
     # In 'subset', write all the fields you want to deduplicate with
     # A new file will be created called 'unDuped-by-Phone.csv'
     # This is the file without duplicates
+    print('------- All Data without duplicates -------')
+    # print(data.drop_duplicates(subset='Phone 1.1', keep="last"))
     # data.drop_duplicates(subset='Phone 1.1', keep="last").to_csv('unDuped-by-Phone.csv')
 
+    # Renames duplicates
+    # data.duplicated(subset='Phone 1.1')
+
     # Prints specific column values
-    print(data[["Name", "Phone 1.1"]].drop_duplicates(subset='Phone 1.1', keep='last'))
-    data[["Name", "Phone 1.1"]].drop_duplicates(subset='Phone 1.1', keep='last').to_csv('Specific-Columns.csv')
+    print('------- Data with specific columns without duplicates -------')
+    # print(data[["Id", "Name", "Phone 1.1"]].drop_duplicates(subset='Phone 1.1', keep='last'))
+    # data[["Id", "Name", "Phone 1.1"]].drop_duplicates(subset='Phone 1.1', keep='last').to_csv('Specific-Columns.csv')
 
     # to_csv by itself just gets rid of quotations in empty columns
     # data.to_csv('unQuoted.csv')
