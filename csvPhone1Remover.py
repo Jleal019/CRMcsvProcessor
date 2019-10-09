@@ -1,4 +1,4 @@
-import pandas, numpy, csv, tkinter, re, phonenumbers
+import pandas, numpy, csv, tkinter, re
 
 '''
 Written on Python 3.7.3
@@ -12,7 +12,6 @@ fileName = 'export.csv'
 
 # creates CSV dataframe using pandas
 data = pandas.read_csv(fileName, delimiter=",", encoding="utf-8", dtype=object)
-
 
 # removes hello@gmail.com use from the Email column
 data = data.replace(to_replace='hello@gmail.com', value='')
@@ -57,5 +56,6 @@ def findDiff(ref, diff):
     print(catData.drop_duplicates(subset='Phone 1.1'))
 
     print(catData[["Name", "Phone 1.1"]])
+
 
 removeDupe()
