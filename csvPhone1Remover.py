@@ -49,8 +49,13 @@ def removeDupe():
     data.loc[data['Phone 1.1'].duplicated(keep='first'), 'Duplicate'] = False
     # Renames the records marked for deletion
     data.loc[data['Duplicate'] == False, 'First Name'] = "MarkDelete360"
+    nuData = data.drop('Duplicate', axis=1)
 
-    print("TESTING", data[['Id', 'First Name', 'Phone 1.1', 'Duplicate']])
+    nuData.to_csv('RenamedColumns.csv')
+
+    # print("TESTING969", nuData)
+
+    # print("TESTING", data[['Id', 'First Name', 'Phone 1.1', 'Duplicate']])
 
     print(data[['Id', 'Name', 'Phone 1.1']])
 
