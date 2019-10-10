@@ -19,7 +19,7 @@ data = data.replace(to_replace='hello@gmail.com', value='')
 # removes leading 1's from phone numbers
 data['Phone 1.1'] = data['Phone 1.1'].str.lstrip('+1')
 
-print(data[["Id", "Name", "Phone 1.1"]])
+# print(data[["Id", "Name", "Phone 1.1"]])
 
 
 def removeDupe():
@@ -51,7 +51,7 @@ def removeDupe():
     data.loc[data['Duplicate'] == False, 'First Name'] = "MarkDelete360"
     nuData = data.drop('Duplicate', axis=1)
 
-    nuData.to_csv('RenamedColumns.csv')
+    nuData[["Id", "Name", "First Name", "Last Name", "Phone 1.1", "Email"]].to_csv('RenamedColumns.csv')
 
     # print("TESTING969", nuData)
 
