@@ -1,4 +1,4 @@
-import pandas, numpy, csv, tkinter, re
+import pandas, os, csv
 
 '''
 Written on Python 3.7.3
@@ -35,7 +35,7 @@ def removeDupe():
     # This is the file without duplicates
     # print('------- All Data without duplicates -------')
     # print(data.drop_duplicates(subset='Phone 1.1', keep='first'))
-    # data.drop_duplicates(subset='Phone 1.1', keep='first').to_csv('unDuped-by-Phone.csv')
+    # data.drop_duplicates(subset='Phone 1.1', keep='first').to_csv('unDuped-by-Phone.csv', index=False)
 
     # Change Name field value based on duplicate row values in Phone 1.1 field
     print('------- Renamed rows -------')
@@ -51,7 +51,7 @@ def removeDupe():
     data.loc[data['Duplicate'] == False, 'First Name'] = 'MarkDelete360'
     nuData = data.drop('Duplicate', axis=1)
 
-    nuData[['Id', 'Name', 'First Name', 'Last Name', 'Phone 1.1', 'Email']].to_csv('PhoneFixColumns.csv')
+    nuData[['Id', 'Name', 'First Name', 'Last Name', 'Phone 1.1', 'Email']].to_csv('PhoneFixColumns.csv', index=False)
 
     # print('TESTING', data[['Id', 'First Name', 'Phone 1.1', 'Duplicate']])
 
@@ -60,27 +60,28 @@ def removeDupe():
     # Prints specific column values
     # print('------- Data with specific columns without duplicates -------')
     # print(data[['Id', 'Name', 'Phone 1.1']].drop_duplicates(subset='Phone 1.1', keep='first'))
-    # data[['Id', 'Name', 'Phone 1.1']].drop_duplicates(subset='Phone 1.1', keep='first').to_csv('Specific-Columns.csv')
+    # data[['Id', 'Name', 'Phone 1.1']].drop_duplicates(subset='Phone 1.1', keep='first').to_csv('Specific-Columns.csv', index=False)
 
     # to_csv by itself just gets rid of quotations in empty columns
-    # data.to_csv('unQuoted.csv')
+    # data.to_csv('unQuoted.csv', index=False)
     print('CSV generated.')
 
     # findDiff(fileName, 'test.csv')
 
 
 def nameFix():
-
-    csvFile = open('RenamedColumns.csv', encoding='utf-8')
-    colNames = ['Id', 'Name', 'First Name', 'Last Name', 'Phone 1.1', 'Email']
+    fileName = 'enamedColumns.csv'
 
     try:
-        with csvFile:
-            csvReader = csv.reader(csvFile, delimiter=',')
-            # fields = csvReader.next()
-            # csvWriter = csv.writer('NamesFixed.csv', sep=',')
+        # open file to read
+        with open(fileName, 'r', encoding='utf-8') as csvFile:
+            csvReader = csv.DictReader(open(csvFile), delimiter=',')
+            csvWriter = csv.DictWriter(open('FixedNames.csv', 'w+'), fieldnames=["Id", "Name", "First Name", "Last Name", "Phone 1.1", "Email"])
+            csvWriter.writeheader()
+            nuLines = []
 
             # error may occur here if amount of columns is less than 6
+            # reading file loop
             for row in csvReader:
                 ID = row[1]
                 Name = row[2]
@@ -95,11 +96,14 @@ def nameFix():
                     Bi = first_Name.split()
                     first_Name = Bi[0]
                     last_Name = Bi[1:]
-                    Name = Bi
-                    csv.writer
+                    Name = first_Name, *last_Name
+                    nuLine = [ID, Name, first_Name, last_Name, phone1, email]
+                    print(nuLine)
+                    # print(ID, ', Name ', *Name, ', fName', first_Name, ', lName', *last_Name, ', phone', phone1, 'Email ', email)
 
-                    print(ID, ', Name ', *Name, ', fName', first_Name, ', lName',
-                          *last_Name, ', phone', phone1, 'Email ', email)
+                    with csvWriter:
+                        docWriter = csv.writer(csvWriter, 'w+')
+                        docWriter.writerow(nuLine)
 
     finally:
         csvFile.close()
@@ -120,4 +124,4 @@ def findDiff(ref, diff):
 
 # removeDupe()
 
-nameFix()
+# nameFix()
