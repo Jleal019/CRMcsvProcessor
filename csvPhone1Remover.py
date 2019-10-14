@@ -69,46 +69,6 @@ def removeDupe():
     # findDiff(fileName, 'test.csv')
 
 
-def nameFix():
-    fileName = 'enamedColumns.csv'
-
-    try:
-        # open file to read
-        with open(fileName, 'r', encoding='utf-8') as csvFile:
-            csvReader = csv.DictReader(open(csvFile), delimiter=',')
-            csvWriter = csv.DictWriter(open('FixedNames.csv', 'w+'), fieldnames=["Id", "Name", "First Name", "Last Name", "Phone 1.1", "Email"])
-            csvWriter.writeheader()
-            nuLines = []
-
-            # error may occur here if amount of columns is less than 6
-            # reading file loop
-            for row in csvReader:
-                ID = row[1]
-                Name = row[2]
-                first_Name = row[3]
-                last_Name = row[4]
-                phone1 = row[5]
-                email = row[6]
-
-                # if Name contains more than 2 values and firstName contains more
-                # than 1 and last_Name is blank
-                if last_Name == '' and len(Name.split()) >= 2 and len(first_Name.split()) >= 1:
-                    Bi = first_Name.split()
-                    first_Name = Bi[0]
-                    last_Name = Bi[1:]
-                    Name = first_Name, *last_Name
-                    nuLine = [ID, Name, first_Name, last_Name, phone1, email]
-                    print(nuLine)
-                    # print(ID, ', Name ', *Name, ', fName', first_Name, ', lName', *last_Name, ', phone', phone1, 'Email ', email)
-
-                    with csvWriter:
-                        docWriter = csv.writer(csvWriter, 'w+')
-                        docWriter.writerow(nuLine)
-
-    finally:
-        csvFile.close()
-
-
 def findDiff(ref, diff):
     print('---------------- Diff Data ---------------------------')
 
@@ -123,5 +83,3 @@ def findDiff(ref, diff):
 
 
 # removeDupe()
-
-# nameFix()
