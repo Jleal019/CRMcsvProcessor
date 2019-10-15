@@ -38,17 +38,32 @@ def nameFix():
                     Name = ' '.join(Name)
                     # nuLines = [Id, Name, first_Name, last_Name, phone1, email]
                     nuLines.update({'Id': Id, 'Name': Name, 'First Name': first_Name, 'Last Name': last_Name, 'Phone 1.1': phone1, 'Email': email})
-                    print(nuLines)
+                    # print(nuLines)
                     # print(Id, ', Name ', *Name, ', fName', first_Name, ', lName', *last_Name, ', phone', phone1, 'Email ', email)
 
                     csvWriter.writerow(nuLines)
 
                 # elif last_Name is in first_Name
-                elif bool_List(last_Name, first_Name):
+                elif last_Name in first_Name:
+                    # creates list
+                    # removes last name from firstName array and reassigns
+                    fName = first_Name.split()
+                    fName.remove(last_Name)
+                    first_Name = fName
 
+                    first_Name = ''.join(first_Name)
+
+                    Name = first_Name
+                    nuLines.update({'Id': Id, 'Name': Name, 'First Name': first_Name, 'Last Name': last_Name, 'Phone 1.1': phone1, 'Email': email})
                     print("------Testing-----")
+                    print(nuLines)
 
-                    print(last_Name)
+                    csvWriter.writerow(nuLines)
+
+                else:
+                    nuLines.update({'Id': Id, 'Name': Name, 'First Name': first_Name, 'Last Name': last_Name, 'Phone 1.1': phone1, 'Email': email})
+                    csvWriter.writerow(nuLines)
+
 
     finally:
         csvFile.close()
@@ -57,11 +72,10 @@ def nameFix():
 # boolean function that returns True if list1 contains something in list2
 def bool_List(list1, list2):
     boo = False
-    for items in list1:
-        for ite in list2:
-            if items == ite:
-                boo = True
-                return boo
+    for it2 in list2:
+        for it1 in list1:
+            if it1 == it2:
+                return True
 
 
 nameFix()
