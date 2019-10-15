@@ -41,12 +41,27 @@ def nameFix():
                     print(nuLines)
                     # print(Id, ', Name ', *Name, ', fName', first_Name, ', lName', *last_Name, ', phone', phone1, 'Email ', email)
 
-                    print("------ Writer -------")
-
                     csvWriter.writerow(nuLines)
+
+                # elif last_Name is in first_Name
+                elif bool_List(last_Name, first_Name):
+
+                    print("------Testing-----")
+
+                    print(last_Name)
 
     finally:
         csvFile.close()
+
+
+# boolean function that returns True if list1 contains something in list2
+def bool_List(list1, list2):
+    boo = False
+    for items in list1:
+        for ite in list2:
+            if items == ite:
+                boo = True
+                return boo
 
 
 nameFix()
