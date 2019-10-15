@@ -35,7 +35,7 @@ def nameFix():
                     last_Name = ''.join(last_Name)
 
                     Name = first_Name, last_Name
-                    Name = ''.join(Name)
+                    Name = ' '.join(Name)
                     # nuLines = [Id, Name, first_Name, last_Name, phone1, email]
                     nuLines.update({'Id': Id, 'Name': Name, 'First Name': first_Name, 'Last Name': last_Name, 'Phone 1.1': phone1, 'Email': email})
                     print(nuLines)
