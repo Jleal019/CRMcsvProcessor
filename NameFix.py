@@ -2,7 +2,7 @@ import csv
 
 
 def nameFix():
-    fileName = 'enamedColumns.csv'
+    fileName = 'export.csv'
 
     try:
         # open file to read and write
