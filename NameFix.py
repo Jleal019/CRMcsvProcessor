@@ -38,7 +38,7 @@ def nameFix():
                     Name = ' '.join(Name)
                     # nuLines = [Id, Name, first_Name, last_Name, phone1, email]
                     nuLines.update({'Id': Id, 'Name': Name, 'First Name': first_Name, 'Last Name': last_Name, 'Phone 1.1': phone1, 'Email': email})
-                    # print(nuLines)
+                    print(nuLines)
                     # print(Id, ', Name ', *Name, ', fName', first_Name, ', lName', *last_Name, ', phone', phone1, 'Email ', email)
 
                     csvWriter.writerow(nuLines)
@@ -46,7 +46,7 @@ def nameFix():
                 # elif last_Name is in first_Name
                 elif last_Name in first_Name:
                     # creates list
-                    # removes last name from firstName array and reassigns
+                    # removes last name from first_Name array and reassigns to first_Name
                     fName = first_Name.split()
                     fName.remove(last_Name)
                     first_Name = fName
@@ -55,15 +55,14 @@ def nameFix():
 
                     Name = first_Name
                     nuLines.update({'Id': Id, 'Name': Name, 'First Name': first_Name, 'Last Name': last_Name, 'Phone 1.1': phone1, 'Email': email})
-                    print("------Testing-----")
                     print(nuLines)
 
                     csvWriter.writerow(nuLines)
 
-                else:
-                    nuLines.update({'Id': Id, 'Name': Name, 'First Name': first_Name, 'Last Name': last_Name, 'Phone 1.1': phone1, 'Email': email})
-                    csvWriter.writerow(nuLines)
-
+                # prints everything else to csv (can probably be left commented out
+                # else:
+                #     nuLines.update({'Id': Id, 'Name': Name, 'First Name': first_Name, 'Last Name': last_Name, 'Phone 1.1': phone1, 'Email': email})
+                #     csvWriter.writerow(nuLines)
 
     finally:
         csvFile.close()
