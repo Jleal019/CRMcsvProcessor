@@ -31,13 +31,18 @@ def nameFix():
                     Bi = first_Name.split()
                     first_Name = Bi[0]
                     last_Name = Bi[1:]
-                    Name = first_Name, *last_Name
+                    # join needed so that last_Name list is converted to string
+                    last_Name = ''.join(last_Name)
+
+                    Name = first_Name, last_Name
+                    Name = ''.join(Name)
                     # nuLines = [Id, Name, first_Name, last_Name, phone1, email]
-                    nuLines.update({'Id': Id, 'Name': Name[0:], 'First Name': first_Name, 'Last Name': last_Name, 'Phone 1.1': phone1, 'Email': email})
+                    nuLines.update({'Id': Id, 'Name': Name, 'First Name': first_Name, 'Last Name': last_Name, 'Phone 1.1': phone1, 'Email': email})
                     print(nuLines)
                     # print(Id, ', Name ', *Name, ', fName', first_Name, ', lName', *last_Name, ', phone', phone1, 'Email ', email)
 
                     print("------ Writer -------")
+
                     csvWriter.writerow(nuLines)
 
     finally:
