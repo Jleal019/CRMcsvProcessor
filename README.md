@@ -3,6 +3,13 @@
 ## PYTHON SCRIPT AND 'export.csv' MUST BE IN THE SAME DIRECTORY
 ## PHONE 1.1 FIELD IN THE PROGRAM MUST CORRESPOND TO THE SECOND PHONE 1 FIELD IN INFUSIONSOFT. (THE FIELD WITHOUT THE PHONE TYPE AT THE END)
 
+
+csvPhone1FixAndDuplicatedRemoval.py: Will remove U.S. International codes from Phone 1.1 fields and will mark duplicates as "MarkDelete360 in the First Name field.
+
+NameFix.py: Will move names to their correct fields. Fixes if First Name fields has both first name and last name.
+
+----------------------------------------------------------------------------
+
 How to use
 
 -Open command prompt (Terminal in Linux/OSX/MAC).
