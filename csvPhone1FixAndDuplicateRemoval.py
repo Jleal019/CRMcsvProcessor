@@ -41,14 +41,16 @@ def removeDupe():
 
     # Change Name field value based on duplicate row values in Phone 1.1 field
     print('------- Renamed rows -------')
-    # Must pass keep as 'last' since that is the value to be kept
-    dup = data.duplicated(subset='Phone 1.1', keep='first')
+    # Must pass keep as 'first' since that is the value to be kept
+    # dup = data.duplicated(subset='Phone 1.1', keep='first')
     # create Duplicate column filled with True value
     data['Duplicate'] = True
     # Needed for some reason.
-    data.duplicated(subset='Phone 1.1', keep='first')
-    # Sets the newest (last) record to False if duplicate
-    data.loc[data['Phone 1.1'].duplicated(keep='first'), 'Duplicate'] = False
+    # data.duplicated(subset='Phone 1.1', keep='first')
+    # Sets the newest (last) record to False if duplicate and if Phone 1.1 field is not empty
+    # data.loc[data['Phone 1.1'] is not '' and data[['Phone 1.1', 'Email']].duplicated(keep='first'), 'Duplicate'] = False
+
+    data.loc[len(data['Phone 1.1']) >= 1 and data[['Phone 1.1', 'Email']].duplicated(keep='first'), 'Duplicate'] = False
     # Renames the records marked for deletion
     data.loc[data['Duplicate'] == False, 'First Name'] = 'MarkDelete360'
     nuData = data.drop('Duplicate', axis=1)
