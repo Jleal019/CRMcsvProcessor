@@ -53,13 +53,17 @@ def removeDupe():
     data.loc[len(data['Phone 1.1']) >= 1 and data[['Phone 1.1', 'Email']].duplicated(keep='first'), 'Duplicate'] = False
     # Renames the records marked for deletion
     data.loc[data['Duplicate'] == False, 'First Name'] = 'MarkDelete360'
-    nuData = data.drop('Duplicate', axis=1)
+    # assigns duplicate record to new dataframe so that only those records are printed
+    # needed so that the updated "today" tag isn't messing with all of the contacts
+    dupData = data.loc[data['Duplicate'] == False]
+    # Below, changed data.drop to dupData.drop
+    nuData = dupData.drop('Duplicate', axis=1)
 
     nuData[['Id', 'Name', 'First Name', 'Last Name', 'Phone 1.1', 'Email']].to_csv('PhoneFixColumns.csv', index=False)
 
     # print('TESTING', data[['Id', 'First Name', 'Phone 1.1', 'Duplicate']])
 
-    print(data[['Id', 'Name', 'Phone 1.1']])
+    print(nuData[['Id', 'Name', 'Phone 1.1']])
 
     # Prints specific column values
     # print('------- Data with specific columns without duplicates -------')

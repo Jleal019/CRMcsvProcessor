@@ -1,10 +1,22 @@
-import csv
+import pandas, csv
+
+'''
+Written on Python 3.7.3
+using Pandas 0.25.1, Numpy 1.17.2 
+
+Description: Processes a csv file from Infusionsoft to fix problems in the Name, First Name, and Last Name fields.
+'''
+
+# create file with all fields needed
+fileName = 'export.csv'
+data = pandas.read_csv(fileName, delimiter=',', encoding='utf-8', dtype=object)
+data[['Id', 'Name', 'First Name', 'Last Name', 'Phone 1.1', 'Email']].to_csv('export.csv', index=False)
 
 
 def nameFix():
-    fileName = 'export.csv'
 
     try:
+
         # open file to read and write
         with open(fileName, 'r', encoding='utf-8') as csvFile:
             csvReader = csv.DictReader(csvFile, delimiter=',')
