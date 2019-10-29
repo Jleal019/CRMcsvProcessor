@@ -56,7 +56,7 @@ def removeDupe():
     # assigns duplicate record to new dataframe so that only those records are printed
     # needed so that the updated "today" tag isn't messing with all of the contacts
     dupData = data.loc[data['Duplicate'] == False]
-    # Below, changed data.drop to dupData.drop
+    # Below, changed data.drop to dupData.drop so that only duplicates are printed
     nuData = dupData.drop('Duplicate', axis=1)
 
     nuData[['Id', 'Name', 'First Name', 'Last Name', 'Phone 1.1', 'Email']].to_csv('PhoneFixColumns.csv', index=False)
