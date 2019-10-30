@@ -49,14 +49,15 @@ def removeDupe():
     # Needed for some reason.
     data.duplicated(subset='Phone 1.1', keep='first')
     # Sets the newest (last) record to False if duplicate and if Phone 1.1 field is not empty
+    # This works if you want to view the contacts you want to delete yourself manually.
+    # change to keep=first if you want to view the old records that you want to keep.
     data.loc[data['Phone 1.1'] is not '' and data[['Phone 1.1', 'Email']].duplicated(keep='first'), 'Duplicate'] = False
 
-    # uncomment this when Second Contract is not a problem
-    # data.loc[len(data['Phone 1.1']) > 0 and data[['Phone 1.1', 'Email']].duplicated(keep='first'), 'Duplicate'] = False
 
     # alteration done because of Second Contract issue
     # data = data['Last Name']
     # data.loc[len(data['Phone 1.1']) > 1 and data[['Phone 1.1', 'Email']].duplicated(keep='first'), 'Duplicate'] = False
+    # data = data.drop(data['Last Name'] == 'Second Contract')
 
     # Renames the records marked for deletion
     data.loc[data['Duplicate'] == False, 'First Name'] = 'MarkDelete360'
