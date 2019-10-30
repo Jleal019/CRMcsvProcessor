@@ -70,7 +70,7 @@ def removeDupe():
     # prints just Name field
     # print(nuData['Name'])
 
-    # nuData[['Id', 'Name', 'First Name', 'Last Name', 'Phone 1.1', 'Email']].to_csv('PhoneFixColumns.csv', index=False)
+    nuData[['Id', 'Name', 'First Name', 'Last Name', 'Phone 1.1', 'Email']].to_csv('PhoneFixColumns.csv', index=False)
 
     # print('TESTING', data[['Id', 'First Name', 'Phone 1.1', 'Duplicate']])
 
