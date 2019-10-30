@@ -34,6 +34,7 @@ def removeDupe():
 
     # In 'subset', write all the fields you want to deduplicate with
     # A new file will be created called 'unDuped-by-Phone.csv'
+    # Basic undupe
     # This is the file without duplicates
     # print('------- All Data without duplicates -------')
     # print(data.drop_duplicates(subset='Phone 1.1', keep='first'))
@@ -46,11 +47,17 @@ def removeDupe():
     # create Duplicate column filled with True value
     data['Duplicate'] = True
     # Needed for some reason.
-    # data.duplicated(subset='Phone 1.1', keep='first')
+    data.duplicated(subset='Phone 1.1', keep='first')
     # Sets the newest (last) record to False if duplicate and if Phone 1.1 field is not empty
-    # data.loc[data['Phone 1.1'] is not '' and data[['Phone 1.1', 'Email']].duplicated(keep='first'), 'Duplicate'] = False
+    data.loc[data['Phone 1.1'] is not '' and data[['Phone 1.1', 'Email']].duplicated(keep='first'), 'Duplicate'] = False
 
-    data.loc[len(data['Phone 1.1']) >= 1 and data[['Phone 1.1', 'Email']].duplicated(keep='first'), 'Duplicate'] = False
+    # uncomment this when Second Contract is not a problem
+    # data.loc[len(data['Phone 1.1']) > 0 and data[['Phone 1.1', 'Email']].duplicated(keep='first'), 'Duplicate'] = False
+
+    # alteration done because of Second Contract issue
+    # data = data['Last Name']
+    # data.loc[len(data['Phone 1.1']) > 1 and data[['Phone 1.1', 'Email']].duplicated(keep='first'), 'Duplicate'] = False
+
     # Renames the records marked for deletion
     data.loc[data['Duplicate'] == False, 'First Name'] = 'MarkDelete360'
     # assigns duplicate record to new dataframe so that only those records are printed
@@ -59,7 +66,10 @@ def removeDupe():
     # Below, changed data.drop to dupData.drop so that only duplicates are printed
     nuData = dupData.drop('Duplicate', axis=1)
 
-    nuData[['Id', 'Name', 'First Name', 'Last Name', 'Phone 1.1', 'Email']].to_csv('PhoneFixColumns.csv', index=False)
+    # prints just Name field
+    # print(nuData['Name'])
+
+    # nuData[['Id', 'Name', 'First Name', 'Last Name', 'Phone 1.1', 'Email']].to_csv('PhoneFixColumns.csv', index=False)
 
     # print('TESTING', data[['Id', 'First Name', 'Phone 1.1', 'Duplicate']])
 
